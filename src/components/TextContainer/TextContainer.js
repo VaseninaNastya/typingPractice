@@ -24,13 +24,10 @@ class TextContainer {
   generateTextObserver() {
     this.curLetterIndex = 0;
     this.lastLetterIndex = this.textDataArr.length - 1;
-    console.log("lastLetterIndex", lastLetterIndex);
-    console.log(
-      "document.querySelectorAll",
-      document.querySelectorAll(".letter")
-    );
+    console.log("lastLetterIndex", this.lastLetterIndex);
     this.lettersNodes = document.querySelectorAll(".letter");
-    this.lettersNodes[this.curLetter].classList.add("letter__active");
+    console.log("Array.from(this.lettersNodes)",Array.from(this.lettersNodes)[this.curLetterIndex]);
+    Array.from(this.lettersNodes)[this.curLetterIndex].classList.add("letter__active");
   }
   generateLayout() {
     const infoBlock = new InfoBlock();
@@ -44,9 +41,12 @@ class TextContainer {
   addEventListeners() {
     document.querySelector("body").addEventListener("keydown", (e) => {
       if (document.querySelector(".letter__active").innerHTML == e.key) {
-        console.log("работает");
         if (this.curLetter != this.lastLetterIndex) {
-          this.curLetter++;
+          console.log("работает", this.curLetterIndex);
+          this.curLetterIndex++;
+          console.log("работает   111", this.curLetterIndex);
+          document.querySelector(".letter__active").classList.remove("letter__active")
+          Array.from(this.lettersNodes)[this.curLetterIndex].classList.add("letter__active");
         } else {console.log("конец");}
       }
     });
