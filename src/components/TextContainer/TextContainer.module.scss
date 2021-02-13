@@ -1,0 +1,25 @@
+.text_container{
+  width: 80%;
+  height: 100%;
+}
+.mainContent_container{
+  background-color: white;
+  width: 100%;
+  min-height: 70vh;
+  padding: 20px  30px;
+  margin: 0 auto;
+  border-radius: 20px;
+  display: flex;
+}
+/*.letter{
+  color: black;
+}*/
+.letter__active{
+  color: #fff;
+  padding: 3px;
+  border-radius: 3px;
+  background-color: yellowgreen;
+}
+.letter__error{
+  background-color: red;
+}

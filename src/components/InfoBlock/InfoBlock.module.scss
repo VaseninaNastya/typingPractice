@@ -1,0 +1,11 @@
+.infoBlock_container{
+  width: 20%;
+  height: 100%;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.errorsCounter, .timer{
+  font-size: 30px;
+}
