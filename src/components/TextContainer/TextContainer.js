@@ -33,6 +33,7 @@ class TextContainer {
     Array.from(this.lettersNodes)[this.curLetterIndex].classList.add(
       "letter__active"
     );
+    this.errorLetterPressrdCounter = 0;
   }
   generateLayout() {
     const infoBlock = new InfoBlock();
@@ -43,18 +44,24 @@ class TextContainer {
     this.addEventListeners();
     return mainContent_container;
   }
+  refresherrorsCounter() {
+    document.querySelector(".errorsCounter").innerHTML =`${Math.round((100 - this.errorLetterPressrdCounter*100/this.lastLetterIndex)*10)/10}%`;
+
+  }
   addEventListeners() {
     document.querySelector("body").addEventListener("keydown", (e) => {
       if (this.curLetter != this.lastLetterIndex && !e.key.includes("Shift")) {
-        if (document.querySelector(".letter__active").innerHTML == e.key){
+        if (document.querySelector(".letter__active").innerHTML == e.key) {
           console.log("работает", this.curLetterIndex);
           this.curLetterIndex++;
           console.log("работает   111", this.curLetterIndex);
           document
             .querySelector(".letter__active")
             .classList.remove("letter__active");
-          if(document.querySelector(".letter__error")){
-            document.querySelector(".letter__error").classList.remove("letter__error")
+          if (document.querySelector(".letter__error")) {
+            document
+              .querySelector(".letter__error")
+              .classList.remove("letter__error");
           }
           Array.from(this.lettersNodes)[this.curLetterIndex].classList.add(
             "letter__active"
@@ -63,9 +70,15 @@ class TextContainer {
           Array.from(this.lettersNodes)[this.curLetterIndex].classList.add(
             "letter__error"
           );
+          this.errorLetterPressrdCounter++;
+          console.log(
+            "this.errorLetterPressrdCounter",
+            this.errorLetterPressrdCounter
+          );
+          this.refresherrorsCounter()
         }
       }
-      if (this.curLetter == this.lastLetterIndex){
+      if (this.curLetter == this.lastLetterIndex) {
         console.log("конец");
       }
     });

@@ -4,7 +4,8 @@ import s from './InfoBlock.module.scss';
 class InfoBlock {
     generateLayout() {
         const reloadButton = create("div",s.reloadButton, "Заново")
-        const infoBlock_container = create("div",s.infoBlock_container, reloadButton)
+        const errorsCounter = create("div", s.errorsCounter, "100%")
+        const infoBlock_container = create("div",s.infoBlock_container, [reloadButton,create("span", null, "точность:"),errorsCounter])
         return infoBlock_container
     }}
 export default InfoBlock
