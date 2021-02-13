@@ -10,6 +10,7 @@ class InfoBlock {
       reloadButton,
       create("span", null, "точность:"),
       errorsCounter,
+      create("span", null, "скорость:"),
       timer
     ]);
     return infoBlock_container;
