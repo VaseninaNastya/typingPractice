@@ -5,11 +5,10 @@ import InfoBlock from "../InfoBlock/InfoBlock";
 
 class TextContainer {
   constructor() {
-    this.data = {
-      int: 0,
-      timer: 0,
-      win: false,
-    };
+    this.curLetterIndex = 0;
+    this.int= 0;
+    this.timer = 0;
+    this.errorLetterPressrdCounter = 0
   }
   async getData() {
     const textAPI = new TextAPI();
@@ -40,9 +39,10 @@ class TextContainer {
     Array.from(this.lettersNodes)[this.curLetterIndex].classList.add(
       "letter__active"
     );
-    this.errorLetterPressrdCounter = 0;
+    
   }
   generateLayout() {
+    if(this.int) this.stopTimer() 
     const infoBlock = new InfoBlock();
     const mainContent_container = create("div", s.mainContent_container, [
       create("div", s.text_container),
@@ -60,22 +60,22 @@ class TextContainer {
     }%`;
   }
   getTimer() {
-    document.querySelector(".timer").innerHTML = `${Math.round((this.curLetterIndex * 60) / this.data.timer)} зн./мин`;
+    document.querySelector(".timer").innerHTML = `${Math.round((this.curLetterIndex * 60) / this.timer)} зн./мин`;
   }
   startTimer() {
-    this.data.int = setInterval(() => {
-      this.data.timer++;
+    this.int = setInterval(() => {
+      this.timer++;
       this.getTimer();
     }, 1000);
   }
 
   stopTimer() {
-    clearInterval(this.data.int);
-    this.data.timer = 0;
+    clearQInterval(this.int);
+    this.timer = 0;
   }
   addEventListeners() {
     document.querySelector("body").addEventListener("keydown", (e) => {
-      if (!this.data.int) this.startTimer();
+      if (!this.int) this.startTimer();
       if (this.curLetter != this.lastLetterIndex && !e.key.includes("Shift")) {
         if (document.querySelector(".letter__active").innerHTML == e.key) {
           console.log("работает", this.curLetterIndex);
@@ -106,7 +106,7 @@ class TextContainer {
       }
       if (this.curLetter == this.lastLetterIndex) {
         console.log("конец");
-        console.log("this.data.timer", this.data.timer);
+        console.log("this.timer", this.timer);
         this.stopTimer();
       }
     });

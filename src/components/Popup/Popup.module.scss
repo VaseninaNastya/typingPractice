@@ -1,0 +1,27 @@
+.popup_wrapper__hidden{
+    display: none;
+}
+.popup_wrapper{
+    width:100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.3);
+    overflow:hidden;
+    position:fixed;
+    top:0px;
+    z-index: 60;
+}
+.popup_content{
+    width: 500px;
+    margin: 20px auto 0 auto;
+    background-color: white;
+    height: 200px;
+    border-radius: 20px;
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.startButton{
+    width: 40%;
+}

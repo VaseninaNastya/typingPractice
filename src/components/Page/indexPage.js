@@ -1,9 +1,11 @@
 import create from "../../utils/create.utils.js";
 import s from "./indexPage.module.scss";
 import TextContainer from "../TextContainer/TextContainer";
+import Popup from "../Popup/Popup.js";
 
 class StartPage {
   generateLayout() {
+    const popup = new Popup()
     this.text_container = new TextContainer();
     const container = create(
       "div",
@@ -11,7 +13,7 @@ class StartPage {
       this.text_container.generateLayout()
     );
     const wrapper = create("div", "wrapper", container);
-    document.body.prepend(wrapper);
+    document.body.prepend(popup.generateLayout(), wrapper);
     this.addText();
     this.addEventListeners();
   }

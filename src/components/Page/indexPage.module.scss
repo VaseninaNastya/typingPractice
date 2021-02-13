@@ -37,7 +37,6 @@ li{
 
 .container{
     width: 1200px;
-
     margin: 0 auto;
 }
 .wrapper{
@@ -46,3 +45,23 @@ li{
     height: 100%;
     background-color: #55c5ff;
 }
+
+.button__prime{
+    width: 90%;
+    color: white;
+    background-color: #3c92bd;
+    height: 30px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .button__prime:hover{
+    box-shadow: 0 0 10px rgba(0,0,0,0.2); /* Параметры тени */
+  }
+  .button__prime:active{
+    background-color: #30799e;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2); /* Параметры тени */
+  }
+  

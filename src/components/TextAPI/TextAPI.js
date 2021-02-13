@@ -4,7 +4,7 @@ class TextAPI {
   }
   /*  Users   */
   async text() {
-    return fetch(this.API_SERVER + '?type=all-meat&paras=2' , {
+    return fetch(this.API_SERVER + '?type=all-meat&paras=1' , {
       method: "GET",
     })
       .then((response) => {
