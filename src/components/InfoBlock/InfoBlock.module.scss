@@ -1,0 +1,26 @@
+.infoBlock_container{
+  width: 20%;
+  height: 100%;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.reloadButton{
+  width: 90%;
+  color: white;
+  background-color: #3c92bd;
+  height: 30px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.reloadButton:hover{
+  box-shadow: 0 0 10px rgba(0,0,0,0.2); /* Параметры тени */
+}
+.reloadButton:active{
+  background-color: #30799e;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2); /* Параметры тени */
+}
