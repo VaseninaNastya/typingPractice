@@ -6,13 +6,13 @@ import InfoBlock from "../InfoBlock/InfoBlock";
 class TextContainer {
   constructor() {
     this.curLetterIndex = 0;
-    this.int= 0;
+    this.int = 0;
     this.timer = 0;
-    this.errorLetterPressrdCounter = 0
+    this.errorLetterPressrdCounter = 0;
   }
   async getData() {
     const textAPI = new TextAPI();
-    this.textData = await textAPI.text();
+    this.textData =   await textAPI.text();
     this.generateText();
   }
   generateText() {
@@ -39,10 +39,9 @@ class TextContainer {
     Array.from(this.lettersNodes)[this.curLetterIndex].classList.add(
       "letter__active"
     );
-    
   }
   generateLayout() {
-    if(this.int) this.stopTimer() 
+    if (this.int) this.stopTimer();
     const infoBlock = new InfoBlock();
     const mainContent_container = create("div", s.mainContent_container, [
       create("div", s.text_container),
@@ -60,7 +59,9 @@ class TextContainer {
     }%`;
   }
   getTimer() {
-    document.querySelector(".timer").innerHTML = `${Math.round((this.curLetterIndex * 60) / this.timer)} зн./мин`;
+    document.querySelector(".timer").innerHTML = `${Math.round(
+      (this.curLetterIndex * 60) / this.timer
+    )} зн./мин`;
   }
   startTimer() {
     this.int = setInterval(() => {
@@ -70,17 +71,20 @@ class TextContainer {
   }
 
   stopTimer() {
-    clearQInterval(this.int);
+    clearInterval(this.int);
     this.timer = 0;
   }
   addEventListeners() {
     document.querySelector("body").addEventListener("keydown", (e) => {
       if (!this.int) this.startTimer();
-      if (this.curLetter != this.lastLetterIndex && !e.key.includes("Shift")) {
+      if (
+        this.curLetterIndex < this.lastLetterIndex &&
+        !e.key.includes("Shift")
+      ) {
+        console.log("this.curLetterIndex", this.curLetterIndex);
+        console.log("this.lastLetterIndex", this.lastLetterIndex);
         if (document.querySelector(".letter__active").innerHTML == e.key) {
-          console.log("работает", this.curLetterIndex);
           this.curLetterIndex++;
-          console.log("работает   111", this.curLetterIndex);
           document
             .querySelector(".letter__active")
             .classList.remove("letter__active");
@@ -104,10 +108,20 @@ class TextContainer {
           this.refresherrorsCounter();
         }
       }
-      if (this.curLetter == this.lastLetterIndex) {
+      if (this.curLetterIndex == this.lastLetterIndex) {
         console.log("конец");
         console.log("this.timer", this.timer);
         this.stopTimer();
+        document.querySelector(
+          ".popup_message"
+        ).innerHTML = `Вы прошли проверку скорости печати! Скорость печати: ${document.querySelector(
+          ".timer"
+        ).textContent}. Точность печати: ${document.querySelector(
+          ".errorsCounter"
+        ).textContent}`;
+        document
+          .querySelector(".popup_wrapper__hidden")
+          .classList.remove("popup_wrapper__hidden");
       }
     });
   }

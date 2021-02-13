@@ -5,7 +5,7 @@ import Popup from "../Popup/Popup.js";
 
 class StartPage {
   generateLayout() {
-    const popup = new Popup()
+    const popup = new Popup("Вы хотите начать проверку скорости печати?", "Начать")
     this.text_container = new TextContainer();
     const container = create(
       "div",
@@ -14,7 +14,6 @@ class StartPage {
     );
     const wrapper = create("div", "wrapper", container);
     document.body.prepend(popup.generateLayout(), wrapper);
-    this.addText();
     this.addEventListeners();
   }
 
@@ -22,7 +21,12 @@ class StartPage {
     this.text_container.getData();
   }
   addEventListeners() {
-    document.querySelector(".reloadButton").addEventListener("click", () => {
+    document.querySelector(".reloadButton").addEventListener("click", (e) => {
+      console.log("e.target.classList",e.target.classList);
+      document.querySelector(".text_container").innerHTML = "";
+      this.addText();
+    });
+    document.querySelector(".startButton").addEventListener("click", () => {
       document.querySelector(".text_container").innerHTML = "";
       this.addText();
     });
