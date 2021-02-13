@@ -25,7 +25,6 @@ class TextContainer {
           .append(create("span", "letter", item));
       });
     this.generateTextObserver();
-    // document.querySelector(".letter").classList.add("letter__active")
   }
   generateTextObserver() {
     this.curLetterIndex = 0;
