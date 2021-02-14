@@ -88,7 +88,7 @@ class TextContainer {
     audio.play();
   }
   addEventListeners() {
-    document.querySelector("body").addEventListener("keydown", (e) => {
+    document.addEventListener("keydown", (e) => {
       if (!this.int) this.startTimer();
       if (
         this.curLetterIndex < this.lastLetterIndex &&
