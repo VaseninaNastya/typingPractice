@@ -29,12 +29,7 @@ class TextContainer {
   generateTextObserver() {
     this.curLetterIndex = 0;
     this.lastLetterIndex = this.textDataArr.length - 1;
-    console.log("lastLetterIndex", this.lastLetterIndex);
     this.lettersNodes = document.querySelectorAll(".letter");
-    console.log(
-      "Array.from(this.lettersNodes)",
-      Array.from(this.lettersNodes)[this.curLetterIndex]
-    );
     Array.from(this.lettersNodes)[this.curLetterIndex].classList.add(
       "letter__active"
     );
@@ -80,8 +75,7 @@ class TextContainer {
         this.curLetterIndex < this.lastLetterIndex &&
         !e.key.includes("Shift")
       ) {
-        console.log("this.curLetterIndex", this.curLetterIndex);
-        console.log("this.lastLetterIndex", this.lastLetterIndex);
+
         if (document.querySelector(".letter__active").innerHTML == e.key) {
           this.curLetterIndex++;
           document
@@ -100,16 +94,10 @@ class TextContainer {
             "letter__error"
           );
           this.errorLetterPressrdCounter++;
-          console.log(
-            "this.errorLetterPressrdCounter",
-            this.errorLetterPressrdCounter
-          );
           this.refresherrorsCounter();
         }
       }
       if (this.curLetterIndex == this.lastLetterIndex) {
-        console.log("конец");
-        console.log("this.timer", this.timer);
         this.stopTimer();
         document.querySelector(
           ".popup_message"

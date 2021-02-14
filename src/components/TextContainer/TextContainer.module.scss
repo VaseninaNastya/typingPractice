@@ -1,5 +1,5 @@
 .text_container{
-  width: 80%;
+  width: calc(100% - 180px);
   height: 100%;
 }
 .mainContent_container{
@@ -10,6 +10,7 @@
   margin: 0 auto;
   border-radius: 20px;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .letter__active{
@@ -20,4 +21,18 @@
 }
 .letter__error{
   background-color: red;
+}
+
+@media (max-width: 700px){
+  .text_container{
+    width: 100%;
+    min-height: 30vh;
+    margin-bottom: 10px;
+    font-size: 20px;
+    line-height: 28px;
+  }
+  .mainContent_container{
+    flex-direction: column;
+    align-items: center;
+  }
 }
