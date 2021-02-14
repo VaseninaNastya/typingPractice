@@ -11,7 +11,8 @@
     z-index: 60;
 }
 .popup_content{
-    width: 500px;
+    max-width: 500px;
+    width: 90%;
     margin: 20px auto 0 auto;
     background-color: white;
     height: 200px;
@@ -21,6 +22,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    text-align: center;
 }
 .startButton{
     width: 40%;

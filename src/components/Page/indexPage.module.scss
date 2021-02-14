@@ -64,4 +64,7 @@ li{
     background-color: #30799e;
     box-shadow: 0 0 20px rgba(0,0,0,0.2); /* Параметры тени */
   }
-  
+  @media (max-width: 1201px){
+    .container{
+        width: 90%;}
+  }

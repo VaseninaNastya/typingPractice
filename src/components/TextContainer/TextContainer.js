@@ -9,6 +9,7 @@ class TextContainer {
     this.int = 0;
     this.timer = 0;
     this.errorLetterPressrdCounter = 0;
+    this.sounds = true;
   }
   async getData() {
     const textAPI = new TextAPI();
@@ -29,12 +30,7 @@ class TextContainer {
   generateTextObserver() {
     this.curLetterIndex = 0;
     this.lastLetterIndex = this.textDataArr.length - 1;
-    console.log("lastLetterIndex", this.lastLetterIndex);
     this.lettersNodes = document.querySelectorAll(".letter");
-    console.log(
-      "Array.from(this.lettersNodes)",
-      Array.from(this.lettersNodes)[this.curLetterIndex]
-    );
     Array.from(this.lettersNodes)[this.curLetterIndex].classList.add(
       "letter__active"
     );
@@ -45,7 +41,8 @@ class TextContainer {
     const mainContent_container = create("div", s.mainContent_container, [
       create("div", s.text_container),
       infoBlock.generateLayout(),
-    ]);
+    ]);  
+    document.querySelector("body").append(this.createSounds());
     this.addEventListeners();
     return mainContent_container;
   }
@@ -73,6 +70,23 @@ class TextContainer {
     clearInterval(this.int);
     this.timer = 0;
   }
+  createSounds() {
+    const fragment = document.createDocumentFragment();
+    const soundPath = "audio/";
+    const sounds = [
+      { file: "errorLetter.wav", name: "errorLetter" }, { file: "okLetter.wav", name: "okLetter" },
+      { file: "win.wav", name: "win" }]
+    sounds.forEach((item) => {
+      create("audio", null, null, fragment, ["src", soundPath + item.file] , ["data-key", item.name ])
+    })
+    return fragment;
+  }
+  playSound(name) {
+    if (!this.sounds) return;
+    const audio = document.querySelector(`audio[data-key="${name}"]`);
+    audio.currentTime = 0;
+    audio.play();
+  }
   addEventListeners() {
     document.querySelector("body").addEventListener("keydown", (e) => {
       if (!this.int) this.startTimer();
@@ -80,9 +94,8 @@ class TextContainer {
         this.curLetterIndex < this.lastLetterIndex &&
         !e.key.includes("Shift")
       ) {
-        console.log("this.curLetterIndex", this.curLetterIndex);
-        console.log("this.lastLetterIndex", this.lastLetterIndex);
         if (document.querySelector(".letter__active").innerHTML == e.key) {
+          this.playSound("okLetter")
           this.curLetterIndex++;
           document
             .querySelector(".letter__active")
@@ -99,17 +112,13 @@ class TextContainer {
           Array.from(this.lettersNodes)[this.curLetterIndex].classList.add(
             "letter__error"
           );
+          this.playSound("errorLetter")
           this.errorLetterPressrdCounter++;
-          console.log(
-            "this.errorLetterPressrdCounter",
-            this.errorLetterPressrdCounter
-          );
           this.refresherrorsCounter();
         }
       }
       if (this.curLetterIndex == this.lastLetterIndex) {
-        console.log("конец");
-        console.log("this.timer", this.timer);
+        this.playSound("win")
         this.stopTimer();
         document.querySelector(
           ".popup_message"
@@ -123,6 +132,18 @@ class TextContainer {
           .classList.remove("popup_wrapper__hidden");
       }
     });
+    document.querySelector("body").addEventListener('click', (e)=>{
+      if(Array.from(e.target.classList).includes("sound_off")){
+        this.sounds = false;
+        e.target.classList.add("sound_active")
+        document.querySelector(".sound_on").classList.remove("sound_active")
+      }
+      if(Array.from(e.target.classList).includes("sound_on")){
+        this.sounds = true;
+        e.target.classList.add("sound_active")
+        document.querySelector(".sound_off").classList.remove("sound_active")
+      }
+    })
   }
 }
 export default TextContainer;
