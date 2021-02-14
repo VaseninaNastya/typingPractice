@@ -9,6 +9,32 @@
 .errorsCounter, .timer{
   font-size: 30px;
 }
+.infoBlock_description{
+  color: rgb(125, 125, 125);
+}
+.sound_container{
+width: 120px;
+height: 30px;
+cursor: pointer;
+background-color: rgb(233, 233, 233);
+display: flex;
+border-radius: 10px;
+}
+.sound_on, .sound_off{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+.sound_on{
+  border-radius: 10px 0 0 10px;
+}
+.sound_off{
+  border-radius:0 10px 10px 0;
+}
+.sound_active{
+  background-color: rgb(212, 212, 212);
+}
 @media (max-width: 1201px){
   .errorsCounter, .timer{
     font-size: 18px;

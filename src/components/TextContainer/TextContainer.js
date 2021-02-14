@@ -9,6 +9,7 @@ class TextContainer {
     this.int = 0;
     this.timer = 0;
     this.errorLetterPressrdCounter = 0;
+    this.sounds = true;
   }
   async getData() {
     const textAPI = new TextAPI();
@@ -81,20 +82,7 @@ class TextContainer {
     return fragment;
   }
   playSound(name) {
-console.log("hhhhhh>>>>>>>>>>>>");
-    /*if (!this.soundKey) return;*/
-
-   /* let lang='en'
-
-
-    if( !localStorage.getItem("kbLang")){
-      lang='ru'
-    }else{
-      lang = localStorage.getItem("kbLang")=='"en"'?  'en': 'ru';
-    }
-
-   if (name == "type") name += "-" + lang;
-*/
+    if (!this.sounds) return;
     const audio = document.querySelector(`audio[data-key="${name}"]`);
     audio.currentTime = 0;
     audio.play();
@@ -144,6 +132,18 @@ console.log("hhhhhh>>>>>>>>>>>>");
           .classList.remove("popup_wrapper__hidden");
       }
     });
+    document.querySelector("body").addEventListener('click', (e)=>{
+      if(Array.from(e.target.classList).includes("sound_off")){
+        this.sounds = false;
+        e.target.classList.add("sound_active")
+        document.querySelector(".sound_on").classList.remove("sound_active")
+      }
+      if(Array.from(e.target.classList).includes("sound_on")){
+        this.sounds = true;
+        e.target.classList.add("sound_active")
+        document.querySelector(".sound_off").classList.remove("sound_active")
+      }
+    })
   }
 }
 export default TextContainer;
