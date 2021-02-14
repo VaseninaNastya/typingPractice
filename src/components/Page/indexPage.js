@@ -22,7 +22,6 @@ class StartPage {
   }
   addEventListeners() {
     document.querySelector(".reloadButton").addEventListener("click", (e) => {
-      console.log("e.target.classList",e.target.classList);
       document.querySelector(".text_container").innerHTML = "";
       this.addText();
     });
