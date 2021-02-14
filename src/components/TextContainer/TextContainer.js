@@ -40,7 +40,8 @@ class TextContainer {
     const mainContent_container = create("div", s.mainContent_container, [
       create("div", s.text_container),
       infoBlock.generateLayout(),
-    ]);
+    ]);  
+    document.querySelector("body").append(this.createSounds());
     this.addEventListeners();
     return mainContent_container;
   }
@@ -68,6 +69,36 @@ class TextContainer {
     clearInterval(this.int);
     this.timer = 0;
   }
+  createSounds() {
+    const fragment = document.createDocumentFragment();
+    const soundPath = "audio/";
+    const sounds = [
+      { file: "errorLetter.wav", name: "errorLetter" }, { file: "okLetter.wav", name: "okLetter" },
+      { file: "win.wav", name: "win" }]
+    sounds.forEach((item) => {
+      create("audio", null, null, fragment, ["src", soundPath + item.file] , ["data-key", item.name ])
+    })
+    return fragment;
+  }
+  playSound(name) {
+console.log("hhhhhh>>>>>>>>>>>>");
+    /*if (!this.soundKey) return;*/
+
+   /* let lang='en'
+
+
+    if( !localStorage.getItem("kbLang")){
+      lang='ru'
+    }else{
+      lang = localStorage.getItem("kbLang")=='"en"'?  'en': 'ru';
+    }
+
+   if (name == "type") name += "-" + lang;
+*/
+    const audio = document.querySelector(`audio[data-key="${name}"]`);
+    audio.currentTime = 0;
+    audio.play();
+  }
   addEventListeners() {
     document.querySelector("body").addEventListener("keydown", (e) => {
       if (!this.int) this.startTimer();
@@ -75,8 +106,8 @@ class TextContainer {
         this.curLetterIndex < this.lastLetterIndex &&
         !e.key.includes("Shift")
       ) {
-
         if (document.querySelector(".letter__active").innerHTML == e.key) {
+          this.playSound("okLetter")
           this.curLetterIndex++;
           document
             .querySelector(".letter__active")
@@ -93,11 +124,13 @@ class TextContainer {
           Array.from(this.lettersNodes)[this.curLetterIndex].classList.add(
             "letter__error"
           );
+          this.playSound("errorLetter")
           this.errorLetterPressrdCounter++;
           this.refresherrorsCounter();
         }
       }
       if (this.curLetterIndex == this.lastLetterIndex) {
+        this.playSound("win")
         this.stopTimer();
         document.querySelector(
           ".popup_message"
