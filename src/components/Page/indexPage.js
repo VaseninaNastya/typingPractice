@@ -31,6 +31,6 @@ class StartPage {
     });
   }
 }
-const startPage = new StartPage();
-startPage.generateLayout();
+/*const startPage = new StartPage();
+startPage.generateLayout();*/
 export default StartPage;
